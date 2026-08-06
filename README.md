@@ -1,16 +1,25 @@
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/Atul12345mandal/pharmacomply-hub-360/main/assets/social-card.png" alt="PharmaComply Hub 360 — multi-tenant GxP quality management" width="100%">
+
+<br><br>
+
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
+<img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+<img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express">
+<img src="https://img.shields.io/badge/MIT-3fb950?style=for-the-badge" alt="License MIT">
+
+<br>
+
+<img src="https://raw.githubusercontent.com/Atul12345mandal/Atul12345mandal/main/assets/stats.svg" alt="149 tables, 160 migrations, 49 routes, 95 services, 312 test files, 140k lines of JavaScript" width="100%">
+
+</div>
+
 # PharmaComply Hub 360 — Architecture Case Study
 
 > A multi-tenant **GxP quality-management platform** for pharmaceutical manufacturing.
 > Electronic batch records, deviations, CAPA, QC laboratory, training management, and a
 > 21 CFR Part 11-compliant audit trail across every module.
-
-<p align="left">
-  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white" alt="Node.js">
-  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL">
-  <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white" alt="Express">
-  <img src="https://img.shields.io/badge/tests-Jest%20%2B%20Playwright-C21325?style=flat-square" alt="Tests">
-  <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="License">
-</p>
 
 > [!NOTE]
 > **The source code is private.** This repository is a public architecture write-up of a
