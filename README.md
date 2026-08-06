@@ -54,24 +54,37 @@ Bugs here are not bugs. They are **findings** — and findings stop shipments.
 
 ## Architecture
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  Single-page shell — light-DOM Custom Elements, strict CSP   │
-│  (no inline handlers; all wiring via delegated data-action)   │
-└───────────────────────────────┬──────────────────────────────┘
-                                │  JSON over HTTPS, JWT bearer
-┌───────────────────────────────▼──────────────────────────────┐
-│  Express                                                      │
-│    authenticate → tenantMiddleware → RBAC → training gate     │
-│    → route handler → audit middleware                         │
-├───────────────────────────────────────────────────────────────┤
-│  Service layer — business rules, validation, transactions     │
-│    every query tenant-scoped; e-signature + release gates     │
-│    composed server-side and shared across entry points        │
-├───────────────────────────────────────────────────────────────┤
-│  PostgreSQL — Row-Level Security, fail-closed                 │
-│    session-scoped tenant context; audit tables append-only    │
-└───────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph client["Browser — single-page shell"]
+        UI["Light-DOM Custom Elements<br/>strict CSP · no inline handlers<br/>all wiring via delegated data-action"]
+    end
+
+    subgraph api["Express — request pipeline"]
+        direction TB
+        A["authenticate<br/><i>JWT + session</i>"]
+        B["tenantMiddleware<br/><i>sets DB tenant context</i>"]
+        C["RBAC<br/><i>DB-backed permissions</i>"]
+        D["training gate<br/><i>qualification check</i>"]
+        E["route handler"]
+        F["audit middleware"]
+        A --> B --> C --> D --> E --> F
+    end
+
+    subgraph svc["Service layer"]
+        S["Business rules · validation · transactions<br/>e-signature + release gates composed once,<br/>shared across every entry point"]
+    end
+
+    subgraph db["PostgreSQL"]
+        R["<b>Row-Level Security — fail-closed</b><br/>session-scoped tenant context<br/>append-only audit tables"]
+    end
+
+    client -- "JSON over HTTPS<br/>JWT bearer" --> api
+    api --> svc
+    svc --> db
+
+    style db fill:#1f6feb,stroke:#0d419d,color:#fff
+    style svc fill:#238636,stroke:#1a7f37,color:#fff
 ```
 
 ### Layered, not clever
